@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Local storge</title>
+</head>
+
+<body>
+    <button onclick="reload()">reload</button>
+    <br>
+    <br>
+    <button onclick="setItem()">SetItem</button>
+    <br>
+    <br>
+    <div>
+        <button onclick="GetItem()">GetItem</button>
+        <h4>Waif Name :<span id="get-waif-name"></span> </h4>
+    </div>
+    <br>
+    <br>
+    <button onclick="RemoveItem()">RemoveItem</button>
+    <br>
+    <br>
+    <div>
+        <button onclick="totalLength()">Total Length</button>
+        <h4 id="total-length"> </h4>
+    </div>
+    <button onclick="ClearItem()">Clear</button>
+    <br>
+    <br>
+    <div>
+        <button onclick="setAObject()">Set Object</button>
+        <button onclick="getAObject()">Get Object</button>
+        <h3 id="get-object"></h3>
+    </div>
+    <div>
+        <button onclick="setAArray()">Set Array</button>
+        <button onclick="getAArray()">Get Array</button>
+        <h3 id="get-Array"></h3>
+    </div>
+    <script>
+        const reload = () => {
+            window.location.reload();
+        }
+        const setItem = () => {
+            window.localStorage.setItem('My Name', 'Sajal Hossain');
+            window.localStorage.setItem('Waif Name', 'Akashi Khatun');
+            window.localStorage.setItem('vasti', 'Samiha Bushra');
+            window.localStorage.setItem('vasta', 'redone');
+        };
+        const GetItem = () => {
+            const getWaifName = window.localStorage.getItem('Waif Name');
+
+            document.getElementById('get-waif-name').innerText = getWaifName;
+
+        }
+        const RemoveItem = () => {
+            const Remove = window.localStorage.removeItem('Waif Name');
+        };
+        const totalLength = () => {
+            const getTotalLength = window.localStorage.length;
+            document.getElementById('total-length').innerHTML = `
+           <span>Total Length : ${getTotalLength}</span>
+            `;
+        };
+        const ClearItem = () => {
+            window.localStorage.clear();
+        };
+        //object
+        const setAObject = () => {
+            const person = { name: 'Sajal', age: 30, profession: 'Web Developer' };
+            const personString = JSON.stringify(person);
+            window.localStorage.setItem('Person', personString);
+        };
+
+        const getAObject = () => {
+            const personString = window.localStorage.getItem('Person');
+            const person = JSON.parse(personString);
+
+            // Check if person is not null before accessing its properties
+            if (person) {
+                document.getElementById('get-object').innerText = person.name;
+            } else {
+                // Handle the case where 'Person' is not found in localStorage
+
+                console.log("Person not found in localStorage");
+            }
+        };
+        //Array
+        const setAArray = () => {
+            const info = [10, 20, 30, 40, 50];
+            const infoString = JSON.stringify(info);
+            window.localStorage.setItem('info', infoString);
+        };
+
+        const getAArray = () => {
+            const infoString = window.localStorage.getItem('info');
+            const info = JSON.parse(infoString);
+
+            // Check if person is not null before accessing its properties
+            if (info) {
+                document.getElementById('get-Array').innerText = info[0];
+            } else {
+                // Handle the case where 'Person' is not found in localStorage
+
+                console.log("info  not found in localStorage");
+            }
+        };
+    </script>
+</body>
+
+</html>

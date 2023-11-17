@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SetItem And Remove Item</title>
+    <style>
+        .container {
+            width: 800px;
+            height: 500px;
+            margin: 0 auto;
+            margin-top: 50px;
+            background-color: black;
+            border-radius: 25px;
+            outline: 10px solid goldenrod;
+            color: white;
+            /* border: 10px solid goldenrod; */
+        }
+
+        .container h3 {
+            color: azure;
+            text-align: center;
+            text-transform: capitalize;
+            font-size: 1.6rem;
+            text-shadow: 3px 3px 5px gold;
+            padding-top: 20px;
+        }
+
+        section {
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .input-group,
+        .btn-group {
+            margin-left: 40px;
+        }
+
+        .input-group label {
+            font-size: 1.6rem;
+        }
+
+        .input-group input[type="text"] {
+            margin-top: 3px;
+            width: 85%;
+            height: 20px;
+            margin-bottom: 40px;
+            padding: 5px;
+            font-size: 1.3rem;
+            border-radius: 5px;
+        }
+
+        .input-group input[type="email"] {
+            margin-top: 3px;
+            width: 85%;
+            height: 20px;
+            margin-bottom: 40px;
+            padding: 5px;
+            font-size: 1.3rem;
+            border-radius: 5px;
+        }
+
+        .input-group input[type="text"]:focus {
+            border: 5px solid royalblue;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .input-group input[type="email"]:focus {
+            border: 5px solid royalblue;
+            outline: none;
+            border-radius: 5px;
+        }
+
+        .btn-group p {
+            margin-bottom: 40px;
+        }
+
+        .btn-group button {
+            background-color: rgb(238, 78, 105);
+            border-radius: 25px;
+            font-size: 1.3rem;
+            display: inline-block;
+            padding: 8px 12px;
+        }
+
+        .name-btn {
+            margin-top: 35px;
+        }
+
+        .email-btn {
+            margin-top: 50px;
+        }
+
+        .message-btn {
+            margin-top: 60px;
+        }
+
+        .sendAndReset {
+            text-align: center;
+        }
+
+        .sendAndReset button {
+            display: inline-block;
+            padding: 8px 32px;
+            background-color: yellowgreen;
+            border-radius: 15%;
+            color: blueviolet;
+            font-size: 1.6rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h3>please contact with me</h3>
+        <section>
+            <div class="input-group">
+                <label for="user-name">Name</label> <br><input type="text" id="user-name" placeholder="Name" /><br>
+                <label for="user-email">Email</label> <br><input type="email" id="user-email" placeholder="Email" />
+                <label for="user-message">Message</label> <br><input type="text" name="" id="user-message"
+                    placeholder="Message">
+            </div>
+            <div class="btn-group">
+                <p class="name-btn"><button id="name-delete">Delete Name</button><button id="send-name">Send
+                        Name</button></p>
+                <p class="email-btn"><button id="delete-email">Delete Email</button><button id="send-email">Send
+                        Email</button></p>
+                <p class="message-btn"><button id="delete-message">Delete Message</button><button id="send-message">Send
+                        Message</button>
+                </p>
+            </div>
+        </section>
+        <div class="sendAndReset">
+            <button type="reset" id="send">Send</button>
+            <button type="reset" id="reset">Reset</button>
+        </div>
+        </p>
+    </div>
+    <script>
+        const setValue = (itemName, itemValue) => {
+            window.localStorage.setItem(itemName, itemValue);
+        }
+        const deleteItem = (KeyName) => window.localStorage.removeItem(KeyName);
+
+        const getInputValue = (userId) => {
+            const userField = document.getElementById(userId);
+            const userValue = userField.value;
+            userField.value = '';
+            return userValue;
+        };
+
+        document.getElementById('send-name').addEventListener('click', function () {
+            const userName = getInputValue('user-name');
+            setValue('name', userName);
+        });
+
+        document.getElementById('name-delete').addEventListener('click', function () {
+            deleteItem('name');
+        });
+
+        document.getElementById('send-email').addEventListener('click', function () {
+            const userEmail = getInputValue('user-email');
+            setValue('email', userEmail);
+        });
+        document.getElementById('delete-email').addEventListener('click', function () {
+            deleteItem('email');
+        });
+        document.getElementById('send-message').addEventListener('click', function () {
+            const userMessage = getInputValue('user-message');
+            setValue('message', userMessage);
+        });
+        document.getElementById('delete-message').addEventListener('click', function () {
+            deleteItem('message');
+        });
+
+        document.getElementById('reset').addEventListener('click', function () {
+            window.localStorage.clear();
+        })
+        //////////////////////////////////////////////////////////////////////////////////////
+        document.getElementById('send').addEventListener('click', function () {
+            // Create an object to store all input values
+            const formData = {
+                name: window.localStorage.getItem('name'),
+                email: window.localStorage.getItem('email'),
+                message: window.localStorage.getItem('message')
+            };
+
+            // Store the object in local storage
+            setValue('formData', JSON.stringify(formData));
+
+        });
+        const getStoredData = () => {
+            const infoString = window.localStorage.getItem('formData');
+            const info = JSON.parse(infoString);
+            // console.log(info);
+            displayData(info)
+        };
+        const displayData = (info) => {
+            console.log(info);
+            document.getElementById('user-name').value = info.name;
+            document.getElementById('user-email').value = info.email;
+            document.getElementById('user-message').value = info.message;
+        }
+        getStoredData()
+    </script>
+</body>
+
+</html>

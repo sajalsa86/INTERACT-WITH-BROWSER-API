@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location And History</title>
+    <style>
+        .green-field {
+            width: 500px;
+            height: 400px;
+            background-color: green;
+            position: relative;
+        }
+
+        .red-circle {
+            width: 180px;
+            height: 180px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: 100px;
+            left: 150px;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+</head>
+
+<body>
+    <div class="green-field">
+        <div class="red-circle animate__heartBeat"></div>
+    </div>
+    <br>
+    <button onclick="locationApply()">Relode</button>
+    <br>
+    <br>
+    <button onclick="assignApply()">Assign</button>
+    <br>
+    <br>
+    <button onclick="hrefApply()">HREF</button>
+    <br>
+    <br>
+    <button onclick="replaceApply()">Replace</button>
+    <br>
+    <br>
+    <button onclick="backApply()">BACK</button>
+    <br>
+    <br>
+    <button onclick="forwardeApply()">FORWARD</button>
+
+    <script src="JS/location-history.js"></script>
+</body>
+
+</html>

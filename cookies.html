@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookies</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+    </style>
+</head>
+
+<body>
+    <button onclick="cookies()">Cookies</button>
+    <script>
+        const cookies = () => {
+            document.cookie.split('; ').map(c => {
+                const parts = c.split('=')
+                console.log(`Name: ${parts[0]} Value: ${parts[1]}`)
+            })
+        };
+    </script>
+</body>
+
+</html>

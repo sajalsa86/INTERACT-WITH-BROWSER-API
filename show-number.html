@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Number</title>
+</head>
+<style>
+    .container {
+        width: 600px;
+        margin: 0 auto;
+        border: 5px solid orange;
+        display: flex;
+    }
+
+    .contain {
+        text-align: center;
+        background-color: darkgreen;
+        width: 300px;
+    }
+
+    .contain p {
+        font-size: 10rem;
+        color: red;
+    }
+
+    .button {
+        background-color: azure;
+        width: 300px;
+    }
+
+    .button button {
+        display: block;
+        width: 300px;
+        text-align: center;
+        font-size: 5rem;
+        height: 100%;
+        color: blueviolet;
+    }
+
+    .button button:hover {
+        background-color: rgba(95, 158, 160, 0.527);
+        cursor: pointer;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="contain">
+            <p id="show-number">1</p>
+        </div>
+        <div class="button">
+            <button onclick="addNumber()">Add Number</button>
+        </div>
+    </div>
+    <script>
+        const addNumber = () => {
+            let count = 0;
+            if (count === 0) {
+                const previousNumberString = document.getElementById('show-number').innerText;
+                const previousNumber = parseInt(previousNumberString);
+                const newNumber = count + 1;
+                const number = document.getElementById('show-number').innerText = previousNumber + newNumber;
+                saveNumber(number);
+            }
+        };
+
+        const getStoredNumber = () => {
+            let number = 0;
+            const storedNumber = window.localStorage.getItem('number');
+            if (storedNumber) {
+                number = JSON.parse(storedNumber);
+            }
+            return number;
+        };
+
+        const saveNumber = (number) => {
+            const numberStringified = JSON.stringify(number);
+            window.localStorage.setItem('number', numberStringified);
+        };
+
+        const displayNumber = () => {
+            const savedNumber = getStoredNumber();
+            document.getElementById('show-number').innerText = savedNumber;
+        };
+
+        displayNumber();
+
+    </script>
+
+</body>
+
+</html>
